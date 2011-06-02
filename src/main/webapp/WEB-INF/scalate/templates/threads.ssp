@@ -1,0 +1,25 @@
+<% attributes("title") = "Thread List" %>
+<%@ val threads: List[perori.ui.main.ThreadViewAdapter] %>
+<%@ val token: String %>
+<h1>Token: ${token}</h1>
+<ol id="posts-list" class="hfeed">
+    <% for (t <- threads) { %>
+    <li>
+        <article class="hentry">
+            <header>
+                <h2 class="entry-title"><a href="#" rel="bookmark" title="${t.title}">${t.title}</a></h2>
+            </header>
+
+            <footer class="post-info">
+                <time class="published" datetime="${t.createdAtIso8601}">${t.createdAt}</time>
+                <address class="vcard author">
+                    By <a class="url fn" href="#">${t.ownerName}</a>
+                </address>
+            </footer>
+
+            <p>${t.body}</p>
+        </article>
+    </li>
+    <% } %>
+</ol>
+<script type="text/javascript" src="/wro/main.js"></script>
