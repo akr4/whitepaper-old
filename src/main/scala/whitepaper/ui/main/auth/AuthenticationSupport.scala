@@ -17,7 +17,8 @@ class OurBasicAuthStrategy(protected override val app: ScalatraKernel, realm: St
   protected def getUserId(user: MyUser): String = user.id
 }
 
-trait AuthenticationSupport extends ScentrySupport[MyUser] with BasicAuthSupport[MyUser] { self: ScalatraKernel =>
+trait AuthenticationSupport extends ScentrySupport[MyUser] with BasicAuthSupport[MyUser] {
+  self: ScalatraKernel =>
 
   val realm = "Scalatra Basic Auth Example"
   protected def contextPath = request.getContextPath
@@ -27,14 +28,13 @@ trait AuthenticationSupport extends ScentrySupport[MyUser] with BasicAuthSupport
 
   protected val scentryConfig = (new ScentryConfig {}).asInstanceOf[ScentryConfiguration]
 
-
-  override protected def configureScentry = {
+  override protected def configureScentry {
     scentry.unauthenticated {
       scentry.strategies('Basic).unauthenticated()
     }
   }
 
-  override protected def registerAuthStrategies = {
+  override protected def registerAuthStrategies {
 
     scentry.registerStrategy('Basic, app => new OurBasicAuthStrategy(app, realm))
   }
