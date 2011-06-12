@@ -26,7 +26,7 @@ trait ThreadController
   }
 
   get("/threads") {
-    val mail = new Mail("ThreadController", "this is a ThreadController.", List(Address("ue@gol.com", "akira ueda")), List(), Address("ue@gol.com", "akira ueda"))
+    val mail = new Mail("ThreadController", "this is a ThreadController.", List(Address("a@example.com", "user1")), List(), Address("b@example.com", "user2"))
     mailSender ! mail
 
     withTransaction {

@@ -3,7 +3,7 @@ package whitepaper.infrastructure.mail.commons
 import org.apache.commons.mail.{SimpleEmail, Email}
 import whitepaper.infrastructure.mail.{Address, Mail}
 
-case class CommonsEmailMail(mail: Mail) extends Mail(mail.subject, mail.body, mail.toAddresses, mail.ccAddresses, mail.fromAddress) {
+class CommonsEmailMail(mail: Mail) extends Mail(mail.subject, mail.body, mail.toAddresses, mail.ccAddresses, mail.fromAddress) {
 
   def toEmail: Email = {
     val email = new SimpleEmail

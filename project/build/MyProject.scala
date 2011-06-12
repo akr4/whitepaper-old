@@ -10,6 +10,7 @@ class MyProject(info: ProjectInfo) extends DefaultWebProject(info) with IdeaProj
   val fuseSourceSnapshots = "FuseSource Snapshot Repository" at "http://repo.fusesource.com/nexus/content/repositories/snapshots"
 
   val scalatra = "org.scalatra" %% "scalatra" % scalatraVersion withSources()
+  val auth = "org.scalatra" %% "scalatra-auth" % scalatraVersion withSources()
   val scalate = "org.scalatra" %% "scalatra-scalate" % scalatraVersion withSources()
   val servletApi = "org.mortbay.jetty" % "servlet-api" % "2.5-20081211" % "provided" withSources()
 

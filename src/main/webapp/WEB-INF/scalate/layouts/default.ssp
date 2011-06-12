@@ -19,7 +19,7 @@
 <body id="index" class="home">
 
 <header id="banner" class="body">
-	<h1><a href="#">Perori Template <strong>${message}</strong></a></h1>
+	<h1><a href="#">White Paper <strong>${message}</strong></a></h1>
 
     <nav>
         <ul>

@@ -15,7 +15,7 @@ trait Entity {
   }
 
   override def toString: String = {
-    format("%s(%d)", getClass.getName, id.simpleString)
+    "%s(%d)".format(getClass.getName, id.simpleString)
   }
 
 }

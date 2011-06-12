@@ -1,5 +1,5 @@
 <% attributes("title") = "Thread List" %>
-<%@ val threads: List[perori.ui.main.ThreadViewAdapter] %>
+<%@ val threads: List[whitepaper.ui.main.ThreadViewAdapter] %>
 <%@ val token: String %>
 <h1>Token: ${token}</h1>
 <ol id="posts-list" class="hfeed">

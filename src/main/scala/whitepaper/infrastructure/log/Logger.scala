@@ -1,6 +1,6 @@
 package whitepaper.infrastructure.log
 
-import org.slf4j.{LoggerFactory, Logger}
+import org.slf4j.LoggerFactory
 
 class Logger[T](category: String) {
 
