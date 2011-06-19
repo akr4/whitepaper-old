@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
   "org.scalatra" %% "scalatra-scalate" % "2.0.0-SNAPSHOT",
   "org.scalatra" %% "scalatra-scalatest" % "2.0.0-SNAPSHOT" % "test",
   "ch.qos.logback" % "logback-classic" % "0.9.25",
+  "org.codehaus.groovy" % "groovy" % "1.8.0",
   "joda-time" % "joda-time" % "1.6.2",
   "org.codehaus.jackson" % "jackson-mapper-asl" % "1.8.0",
   "ro.isdc.wro4j" % "wro4j-core" % "1.3.6",
