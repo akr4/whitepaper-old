@@ -1,11 +1,8 @@
 package whitepaper.domain
 
-class User(
-  val id: EntityId,
-  val name: String
-) extends Entity {
-}
+import org.squeryl.KeyedEntity
 
-object User {
-  def apply(name: String): User = new User(EntityId.newEntityId, name)
-}
+class User(
+  val id: Long,
+  val name: String
+) extends KeyedEntity[Long]

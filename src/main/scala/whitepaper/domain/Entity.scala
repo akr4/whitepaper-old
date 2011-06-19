@@ -1,7 +1,9 @@
 package whitepaper.domain
 
-trait Entity {
-  val id: EntityId
+import org.squeryl.KeyedEntity
+
+trait Entity extends KeyedEntity[Long] {
+  val id: Long
 
   override def equals(o: Any): Boolean = {
     o match {
@@ -15,7 +17,7 @@ trait Entity {
   }
 
   override def toString: String = {
-    "%s(%d)".format(getClass.getName, id.simpleString)
+    "%s(%d)".format(getClass.getName, id)
   }
 
 }

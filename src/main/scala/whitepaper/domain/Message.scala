@@ -1,17 +1,17 @@
 package whitepaper.domain
 
 import org.joda.time.DateTime
+import org.squeryl.KeyedEntity
+import org.squeryl.dsl.{ManyToOne, OneToMany}
 
 class Message(
-  val id: EntityId,
-  val owner: User,
+  val id: Long,
+  val ownerId: Long, // User.id
   val body: String,
   val createdAt: DateTime
-) extends Entity {
-  println(id.simpleString)
-}
+) extends KeyedEntity[Long] {
 
-object Message {
-  def apply(owner: User, body: String, createdAt: DateTime): Message =
-    new Message(EntityId.newEntityId, owner, body, createdAt)
+  import whitepaper.domain.squeryl.AppSchema._
+
+  lazy val owner: ManyToOne[User] = userToMessage.right(this)
 }

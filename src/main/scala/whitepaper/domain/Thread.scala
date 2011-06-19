@@ -1,27 +1,23 @@
 package whitepaper.domain
 
 import org.joda.time.DateTime
-
+import org.squeryl.dsl.{ManyToOne, OneToMany}
+import org.squeryl.KeyedEntity
 
 class Thread(
-  val id: EntityId,
+  val id: Long,
   val title: String,
-  val message: Message
-) extends Entity {
+  val messageId: Long
+) extends KeyedEntity[Long] {
 
-  private var _messages = List[Message]()
+  import whitepaper.domain.squeryl.AppSchema._
 
   def write(writtenBy: User, body: String) {
-    _messages ::= Message(writtenBy, body, new DateTime)
   }
 
-  def owner: User = message.owner
-  def body: String = message.body
-  def createdAt: DateTime = message.createdAt
-  def messages = _messages
+  lazy val message: ManyToOne[Message] = messageToThread.right(this)
+  def owner: User = message.head.owner.head // TODO: too many dots
+  def body: String = message.head.body
+  def createdAt: DateTime = message.head.createdAt
 
-}
-
-object Thread {
-  def apply(title: String, message: Message): Thread = new Thread(EntityId.newEntityId, title, message)
 }

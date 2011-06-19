@@ -13,7 +13,7 @@ class CommonsEmailMail(mail: Mail) extends Mail(mail.subject, mail.body, mail.to
     ccAddresses.foreach(a => email.addCc(a.email, a.name))
     email.setFrom(fromAddress.email, fromAddress.name)
     email.setHostName("localhost")
-    email.setDebug(true)
+    email.setDebug(false)
     email
   }
 }
