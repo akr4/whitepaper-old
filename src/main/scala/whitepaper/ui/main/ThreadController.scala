@@ -1,20 +1,17 @@
 package whitepaper.ui.main
 
-import auth.{AuthenticationSupport, MyUser}
-import javax.servlet.ServletContext
 import whitepaper.domain.{ThreadRepositoryComponent}
 import whitepaper.infrastructure.Transactional
 import org.scalatra.{CsrfTokenSupport, FlashMapSupport, ScalatraKernel}
 import whitepaper.infrastructure.mail.{Address, Mail, MailSenderComponent}
-import org.scalatra.auth.strategy.BasicAuthSupport
+import javax.servlet.ServletContext
 
 trait ThreadController
   extends ScalatraKernel
   with FlashMapSupport
   with Controller
   with Transactional
-  with CsrfTokenSupport
-  with AuthenticationSupport {
+  with CsrfTokenSupport {
   self: ThreadRepositoryComponent with MailSenderComponent
     { def servletContext: ServletContext }
   =>
@@ -29,8 +26,6 @@ trait ThreadController
   }
 
   get("/threads") {
-    basicAuth()
-
     val mail = new Mail("ThreadController", "this is a ThreadController.", List(Address("a@example.com", "user1")), List(), Address("b@example.com", "user2"))
     mailSender ! mail
 

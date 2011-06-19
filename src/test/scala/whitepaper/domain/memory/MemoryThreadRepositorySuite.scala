@@ -2,8 +2,8 @@ package whitepaper.domain.memory
 
 import org.scalatest.FunSuite
 import org.scalatest.matchers.ShouldMatchers
-import whitepaper.infrastructure.MutableClockComponent
 import org.joda.time.DateTime
+import whitepaper.infrastructure.clock.MutableClockComponent
 
 
 class MemoryThreadRepositorySuite extends FunSuite with ShouldMatchers
