@@ -23,7 +23,7 @@ class MainServlet
       new H2Adapter)
   )
 
-  import org.squeryl.customtypes.CustomTypesMode._
+  import org.squeryl.PrimitiveTypeMode._
   inTransaction {
     AppSchema.drop
     AppSchema.create
