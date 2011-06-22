@@ -1,0 +1,36 @@
+<% attributes("title") = "Thread" %>
+<%@ val thread: whitepaper.ui.main.ThreadViewAdapter %>
+<article class="hentry">
+    <header>
+        <h2 class="entry-title">${thread.title}</h2>
+    </header>
+
+    <footer class="post-info">
+        <time class="published" datetime="${thread.createdAtIso8601}">${thread.createdAt}</time>
+        <address class="vcard author">
+            By <a class="url fn" href="#">${thread.ownerName}</a>
+        </address>
+    </footer>
+
+    <p>${thread.body}</p>
+</article>
+<ol id="posts-list" class="hfeed">
+    <% for (m <- thread.comments) { %>
+    <li>
+        <article class="hentry">
+            <header>
+            </header>
+
+            <footer class="post-info">
+                <time class="published" datetime="${m.createdAtIso8601}">${m.createdAt}</time>
+                <address class="vcard author">
+                    By <a class="url fn" href="#">${m.ownerName}</a>
+                </address>
+            </footer>
+
+            <p>${m.body}</p>
+        </article>
+    </li>
+    <% } %>
+</ol>
+<script type="text/javascript" src="/wro/main.js"></script>

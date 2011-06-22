@@ -1,6 +1,6 @@
 <%@ val title: String %>
 <%@ val headline: String = title %>
-<%@ val message: String %>
+<%@ val message: String = "" %>
 <%@ val body: String %>
 <!DOCTYPE html>
 <html>
