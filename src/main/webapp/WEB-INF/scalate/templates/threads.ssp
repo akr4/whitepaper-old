@@ -7,7 +7,7 @@
     <li>
         <article class="hentry">
             <header>
-                <h2 class="entry-title"><a href="#" rel="bookmark" title="${t.title}">${t.title}</a></h2>
+                <h2 class="entry-title"><a href="${t.detailUrl}" rel="bookmark" title="${t.title}">${t.title}</a></h2>
             </header>
 
             <footer class="post-info">

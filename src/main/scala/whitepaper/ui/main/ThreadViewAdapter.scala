@@ -12,4 +12,6 @@ class ThreadViewAdapter(private val thread: Thread) {
   def createdAt = DATE_FORMAT.print(thread.createdAt)
   def createdAtIso8601 = thread.createdAt.toString()
   lazy val comments = thread.comments.map { c => new MessageViewAdapter(c) }
+
+  def detailUrl() = "/threads/" + thread.id
 }
