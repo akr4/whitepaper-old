@@ -8,4 +8,5 @@ appender("STDOUT", ConsoleAppender) {
   }
 }
 root(INFO, [ "STDOUT" ])
-logger("whitepaper", DEBUG, [ "STDOUT" ])
+logger("whitepaper", DEBUG, [ "STDOUT" ], false)
+logger("ro.isdc.wro", INFO, [ "STDOUT" ], false)

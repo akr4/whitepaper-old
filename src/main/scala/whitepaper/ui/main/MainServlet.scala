@@ -15,18 +15,12 @@ class MainServlet
   with MutableClockComponent
   with CommonsMailSenderComponent {
 
-//  Class.forName("org.h2.Driver");
-//  SessionFactory.concreteFactory = Some(() =>
-//    Session.create(
-//      java.sql.DriverManager.getConnection("jdbc:h2:~/example", "sa", ""),
-//      new H2Adapter)
-//  )
   Class.forName("org.postgresql.Driver");
   SessionFactory.concreteFactory = Some(() => {
       val s = Session.create(
         java.sql.DriverManager.getConnection("jdbc:postgresql:whitepaper", "whitepaper", ""),
         new PostgreSqlAdapter)
-      s.setLogger(sql => log(sql))
+//      s.setLogger(sql => log(sql))
       s
     }
   )
