@@ -4,7 +4,7 @@ import whitepaper.infrastructure.Transactional
 import org.scalatra.{CsrfTokenSupport, FlashMapSupport, ScalatraKernel}
 import whitepaper.infrastructure.mail.{Address, Mail, MailSenderComponent}
 import javax.servlet.ServletContext
-import whitepaper.domain.squeryl.ThreadRepositoryComponent
+import whitepaper.domain.squeryl.{MessageRepositoryComponent, User, ThreadRepositoryComponent}
 
 trait ThreadController
   extends ScalatraKernel
@@ -12,7 +12,9 @@ trait ThreadController
   with Controller
   with Transactional
   with CsrfTokenSupport {
-  self: ThreadRepositoryComponent with MailSenderComponent
+  self: ThreadRepositoryComponent
+    with MessageRepositoryComponent
+    with MailSenderComponent
     { def servletContext: ServletContext }
   =>
 
@@ -35,7 +37,7 @@ trait ThreadController
       render("threads",
         Map(
           "threads" -> threadRepository.findAll().map { t => new ThreadViewAdapter(t) },
-          "message" -> flash.getOrElse("message", "welcome back!"),
+          "message" -> flash.getOrElse("message", "<h1>welcome back!</h1>"),
           "token" -> session.getOrElse("csrfToken", "token")
         ))
     }
@@ -45,7 +47,11 @@ trait ThreadController
     inTransaction {
       val id = params("id").toLong
       threadRepository.find(id) match {
-        case Some(t) => render("thread", Map("thread" -> new ThreadViewAdapter(t)))
+        case Some(t) => {
+          render("thread", Map("thread" -> new ThreadViewAdapter(t)))
+          t.firstMessage.viewed(new User("user1"))
+          messageRepository.save(t.firstMessage)
+        }
         case None => status(404)
       }
     }

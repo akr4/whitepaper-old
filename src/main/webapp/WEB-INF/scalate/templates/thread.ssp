@@ -10,6 +10,7 @@
         <address class="vcard author">
             By <a class="url fn" href="#">${thread.ownerName}</a>
         </address>
+        閲覧数: ${thread.viewCount}
     </footer>
 
     <p>${thread.body}</p>

@@ -1,7 +1,6 @@
 package whitepaper.domain.squeryl
 
 import org.squeryl.Schema
-import whitepaper.domain.squeryl._
 
 object BbsDb extends Schema {
 

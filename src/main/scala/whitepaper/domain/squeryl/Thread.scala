@@ -16,7 +16,7 @@ class Thread(
   private lazy val _messages: OneToMany[Message] = threadToMessages.left(this)
 
   lazy val messages = _messages.toList
-  lazy val firstMessage: Message = _messages.head
+  lazy val firstMessage: Message = _messages.toList.sortWith(_.id < _.id).head
   lazy val owner: User = firstMessage.owner.head // TODO: too many dots
   lazy val body: String = firstMessage.body
   lazy val createdAt: DateTime = new DateTime // firstMessage.createdAt
