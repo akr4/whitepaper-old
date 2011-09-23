@@ -34,4 +34,4 @@
     </li>
     <% } %>
 </ol>
-<script type="text/javascript" src="/wro/main.js"></script>
+<script type="text/javascript" src="/static/core.js"></script>

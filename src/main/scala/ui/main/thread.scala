@@ -40,8 +40,8 @@ trait ThreadController {
   import unfiltered.scalate.Scalate
 
   def threadController: Intent = {
-    case req @ ContextPath(_, Seg("threads" :: Nil)) =>
-      debug(req)
+    case req @ ContextPath(ctx, Seg("threads" :: Nil)) =>
+      debug(ctx)
       Ok ~> HtmlContent ~> Scalate(req, "threads.ssp",
 	      ("threads" -> threadRepository.findAll().map { t => new ThreadViewAdapter(t) }))
 

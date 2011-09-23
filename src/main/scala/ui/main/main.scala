@@ -9,7 +9,9 @@ trait ScalateConfig {
   import org.fusesource.scalate.TemplateEngine
   import org.fusesource.scalate.layout.DefaultLayoutStrategy
   implicit val engine = new TemplateEngine(List(
-    new java.io.File("src/main/webapp/WEB-INF/scalate/templates")
+    // how do I get appropriate folder in different environments such a jetty-run or war on Tomcat?
+    new java.io.File("src/main/webapp/WEB-INF/scalate/templates"),
+    new java.io.File("webapps/ROOT/WEB-INF/scalate/templates")
   ))
   engine.layoutStrategy = new DefaultLayoutStrategy(engine)
 }
