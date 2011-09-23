@@ -1,10 +1,11 @@
 package whitepaper.ui.main
 
-import org.joda.time.format.DateTimeFormat
-import whitepaper.domain.squeryl.Message
-import org.joda.time.DateTime
+import whitepaper.domain.Message
 
 class MessageViewAdapter(private val message: Message) {
+  import org.joda.time.format.DateTimeFormat
+  import org.joda.time.DateTime
+
   private val DATE_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd")
 
   def body = message.body
@@ -13,3 +14,4 @@ class MessageViewAdapter(private val message: Message) {
   def createdAtIso8601 = createdAt.toString()
 
 }
+

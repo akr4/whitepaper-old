@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>main</servlet-name>
-        <servlet-class>whitepaper.ui.main.MainServlet</servlet-class>
+        <servlet-class>whitepaper.ui.main.MainPlan</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>main</servlet-name>

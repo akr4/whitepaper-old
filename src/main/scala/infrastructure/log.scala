@@ -1,8 +1,7 @@
 package whitepaper.infrastructure.log
 
-import org.slf4j.LoggerFactory
-
 class Logger[T](category: String) {
+  import org.slf4j.LoggerFactory
 
   private val logger = LoggerFactory.getLogger(category)
 
@@ -29,3 +28,16 @@ class Logger[T](category: String) {
   }
 
 }
+
+trait Logging {
+
+  private val logger = new Logger(getClass.getName)
+
+  def trace(message: => AnyRef) { logger.trace(message) }
+  def debug(message: => AnyRef) { logger.debug(message) }
+  def info(message: => AnyRef) { logger.info(message) }
+  def warn(message: => AnyRef) { logger.warn(message) }
+  def error(message: => AnyRef) { logger.error(message) }
+
+}
+
