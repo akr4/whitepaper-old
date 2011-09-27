@@ -18,6 +18,8 @@ libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "1.6.2" withSources(),
   "org.scala-tools.time" %% "time" % "0.5",
   "commons-email" % "commons-email" % "1.1",
+  "org.fusesource.scalate" % "scalate-wikitext" % "1.5.2",
+  "org.fusesource.scalate" % "scalate-page" % "1.5.2",
 //  "net.liftweb" %% "lift-json" % "2.4-M3",
   // Logging
   "ch.qos.logback" % "logback-classic" % "0.9.25" withSources(),
@@ -34,3 +36,5 @@ libraryDependencies ++= Seq(
   "org.eclipse.jetty" % "jetty-webapp" % "7.3.0.v20110203" % "jetty"
 )
 
+// jetty
+jettyContext := "/whitepaper"

@@ -4,6 +4,7 @@ import unfiltered.request._
 import unfiltered.response._
 import unfiltered.filter.Plan
 import unfiltered.filter.Plan.Intent
+import unfiltered.filter.request.ContextPath
 import whitepaper.domain.Thread
 import whitepaper.domain.Message
 import whitepaper.domain.User
@@ -33,24 +34,22 @@ trait ThreadController {
     with MessageRepositoryComponent
     with MailSenderComponent
     with Logging
-    with ScalateConfig
   =>
 
-  import unfiltered.filter.request.ContextPath
-  import unfiltered.scalate.Scalate
-
-  def threadController: Intent = {
+  def threadController(
+    engine: org.fusesource.scalate.TemplateEngine,
+    config: javax.servlet.FilterConfig
+  ): Intent = {
     case req @ ContextPath(ctx, Seg("threads" :: Nil)) =>
       debug(ctx)
-      Ok ~> HtmlContent ~> Scalate(req, "threads.ssp",
+      Ok ~> HtmlContent ~> Scalate(engine, config, req, "threads.ssp",
 	      ("threads" -> threadRepository.findAll().map { t => new ThreadViewAdapter(t) }))
-
     case req @ ContextPath(_, Seg("threads" :: id :: Nil)) =>
       threadRepository.find(id.toInt) match {
 	case Some(t) =>
 	  t.firstMessage.viewed(new User("user1"))
 	  messageRepository.save(t.firstMessage)
-	  Ok ~> HtmlContent ~> Scalate(req, "thread.ssp",
+	  Ok ~> HtmlContent ~> Scalate(engine, config, req, "thread.ssp",
 	          ("thread" -> new ThreadViewAdapter(t))
 		)
         case None => NotFound

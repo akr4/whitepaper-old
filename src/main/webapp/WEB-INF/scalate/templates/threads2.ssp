@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8" />
     <title>${title}</title>
-    <link rel="stylesheet" href="/static/core.css" type="text/css" />
+    <link rel="stylesheet" href="<% url("/static/core.css") %>" type="text/css" />
 </head>
 
 <body id="index" class="home">

@@ -5,7 +5,6 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
-<!--
     <filter>
         <filter-name>WebResourceOptimizer</filter-name>
         <filter-class>ro.isdc.wro.http.WroFilter</filter-class>
@@ -14,7 +13,6 @@
         <filter-name>WebResourceOptimizer</filter-name>
         <url-pattern>/static/*</url-pattern>
     </filter-mapping>
--->
     <filter>
         <filter-name>main</filter-name>
         <filter-class>whitepaper.ui.main.MainPlan</filter-class>

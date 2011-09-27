@@ -4,17 +4,9 @@ import whitepaper.infrastructure.mail.commons.CommonsMailSenderComponent
 import whitepaper.infrastructure.clock.MutableClockComponent
 import whitepaper.infrastructure.log.Logging
 import whitepaper.domain.{DummyMessageRepositoryComponent, DummyThreadRepositoryComponent}
-
-trait ScalateConfig {
-  import org.fusesource.scalate.TemplateEngine
-  import org.fusesource.scalate.layout.DefaultLayoutStrategy
-  implicit val engine = new TemplateEngine(List(
-    // how do I get appropriate folder in different environments such a jetty-run or war on Tomcat?
-    new java.io.File("src/main/webapp/WEB-INF/scalate/templates"),
-    new java.io.File("webapps/ROOT/WEB-INF/scalate/templates")
-  ))
-  engine.layoutStrategy = new DefaultLayoutStrategy(engine)
-}
+import org.fusesource.scalate.TemplateEngine
+import org.fusesource.scalate.servlet.ServletTemplateEngine
+import org.fusesource.scalate.layout.DefaultLayoutStrategy
 
 class MainPlan
   extends unfiltered.filter.Plan
@@ -23,7 +15,6 @@ class MainPlan
   with DummyMessageRepositoryComponent
   with MutableClockComponent
   with CommonsMailSenderComponent
-  with ScalateConfig
   with Logging {
 
   val clock = new MutableClock
@@ -32,8 +23,16 @@ class MainPlan
   val mailSender = new CommonsMailSender
   mailSender.start()
 
+  override def init(config: javax.servlet.FilterConfig) {
+    super.init(config)
+  }
+
   def intent = {
-    threadController
+    val engine = new ServletTemplateEngine(config)
+    engine.layoutStrategy = new DefaultLayoutStrategy(engine)
+
+    debug("start main")
+    threadController(engine, config)
   }
 
 }
